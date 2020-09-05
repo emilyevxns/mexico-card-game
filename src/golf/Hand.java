@@ -53,14 +53,19 @@ public class Hand {
 
 	/**
 	 * Replaces one card in the hand with a card drawn from the deck
-	 * @param replace
-	 * @param drawn
+	 * @param replace card to replace
+	 * @param drawn card from deck
 	 */
 	public void replaceCard(PlayingCard replace, PlayingCard drawn)
 	{
+		int index = 0;
+		for (int i = 0; i < cards.size(); i++) {
+			if (cards.get(i) == replace) {  // will probably have to replace this with a proper equals method?
+				index = i;
+			}
+		}
+		cards.add(index, drawn);
 		cards.remove(replace);
-		cards.add(drawn);
-
 	}
 	
 	/**
