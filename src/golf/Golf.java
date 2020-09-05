@@ -19,12 +19,26 @@ public class Golf {
 	public static final int UNDO_MOVE = 4;
 	public static final int CHANGE_STRATEGY = 5;
 
+	
+	public static final int SHOW_NONE = 1;
+	public static final int SHOW_TWO = 2;
+	public static final int SHOW_ALL = 3;
 
+	public static ShowNoneStrategy SHOW_NONE_STRATEGY;
+	public static ShowTwoStrategy SHOW_TWO_STRATEGY;
+	public static AllCardsVisibleStrategy SHOW_ALL_CARDS;
 
 	private boolean humanKnock = false;
 	private boolean computerKnock = false;
+	
+	private IStrategy playerStrategy;
 
-
+	public Golf() {
+		SHOW_NONE_STRATEGY = new ShowNoneStrategy();
+		SHOW_TWO_STRATEGY = new ShowTwoStrategy();
+		SHOW_ALL_CARDS = new AllCardsVisibleStrategy();
+		playerStrategy = getPlayerStrategy();
+	}
 	/**
 	 * Asks for a yes/no response and repeats the question until valid input is received
 	 * @param prompt - the question
@@ -184,8 +198,19 @@ public class Golf {
 		{
 			for (PlayingCard card : cardOptions)
 			{
-
-				System.out.println("" + cardWanted + ": " + card.toString() );
+				if (playerStrategy.getClass() == SHOW_NONE_STRATEGY.getClass()) {
+					System.out.println("" + cardWanted + ": Card "+ cardWanted  );
+				}
+				else if (playerStrategy.getClass() == SHOW_TWO_STRATEGY.getClass()) {
+					if (cardOptions.size()-cardWanted >=2) {
+						System.out.println("" + cardWanted + ": " + card.toString() );
+					} else {
+						System.out.println("" + cardWanted + ": Card "+ cardWanted );
+					}
+				} 
+				else if (playerStrategy.getClass() == SHOW_ALL_CARDS.getClass()){
+					System.out.println("" + cardWanted + ": " + card.toString() );
+				}
 				cardWanted++;
 			}
 			if (canPass)
@@ -250,7 +275,25 @@ public class Golf {
 		}
 
 	}
-
+	
+	public IStrategy getPlayerStrategy() {
+		int selectedStrategy = strategyMenu();
+		switch (selectedStrategy) {
+			case SHOW_NONE: 
+				return SHOW_NONE_STRATEGY;
+			case SHOW_TWO:
+				return SHOW_TWO_STRATEGY;
+			case SHOW_ALL:
+				return SHOW_ALL_CARDS;
+			default: 
+				System.out.println("Please enter 1-3");
+		}
+		return null;
+	}
+	public void setPlayerStrategy() {
+		IStrategy newStrategy = getPlayerStrategy();
+		playerStrategy = newStrategy;
+	}
 	/**
 	 * Controls game play.
 	 */
@@ -259,8 +302,6 @@ public class Golf {
 		Player human = new Player("Human");
 		Player computer = new Player("Computer");
 		DiscardPile discards = new DiscardPile();
-
-
 		Scanner in = new Scanner(System.in);
 		boolean isWinner = false;
 		System.out.println("Welcome to Golf!");
@@ -276,8 +317,8 @@ public class Golf {
 
 
 		boolean playerTurn = true;
-		System.out.println(human);
-		System.out.println(computer);
+		System.out.println(playerStrategy.showCards(human));
+		System.out.println(playerStrategy.showCards(computer));
 		discards.addCard(drawCards("", deck ));
 		System.out.println("Discarded: " + discards.getTop());
 
@@ -330,10 +371,10 @@ public class Golf {
 					System.out.println("Undo is not implemented!");
 					break;
 				case CHANGE_STRATEGY:
-					System.out.println("Strategy change is not implemented!");
+					setPlayerStrategy();
 					break;	
 				}
-				System.out.println(human);
+				System.out.println(playerStrategy.showCards(human));
 			}
 
 			//If we've run out of cards to draw or if the human has knocked
@@ -344,14 +385,14 @@ public class Golf {
 			}
 			else {
 				//Computer's turn!
-
+				//Decide if the computer should knock
 				System.out.println("\nComputer's Turn\n");
 				if (computer.calculateScore() <= 20)
 				{
 					computerKnock = true;
 					System.out.println("Computer is knocking");
 				}
-				else
+				else //Computer chooses to replace a card 
 				{
 					PlayingCard drawn = drawCards("Drawing card from deck", deck);
 					System.out.println("Drew " + drawn.toString());
@@ -370,8 +411,7 @@ public class Golf {
 
 					discards.addCard(replaced);
 					System.out.println("Discarded: " + discards.getTop());
-
-					System.out.println(computer);
+					System.out.println(playerStrategy.showCards(computer));
 					playerTurn = true;
 
 					//If we've run out of cards to draw or if the human has knocked
