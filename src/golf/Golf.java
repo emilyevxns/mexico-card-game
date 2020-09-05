@@ -62,7 +62,7 @@ public class Golf {
 
 
 	/**
-	 * Our main menu for the player options. 
+	 * Our main menu for the player action options. 
 	 * @return the valid menu choice
 	 */
 	private  int playerMenu()
@@ -104,7 +104,7 @@ public class Golf {
 
 
 	/**
-	 * Our main menu for the player options. 
+	 * Our main menu for the player strategy options. 
 	 * @return the valid menu choice
 	 */
 	private  int strategyMenu()
@@ -160,6 +160,13 @@ public class Golf {
 		return card;
 	}
 
+	/**
+	 * Choose a card from the hand
+	 * @param prompt 
+	 * @param cardOptions cards to choose from
+	 * @param canPass 
+	 * @return chosen card
+	 */
 	private PlayingCard makeCardChoice(String prompt, ArrayList<PlayingCard> cardOptions, boolean canPass)
 	{
 		if (cardOptions.size() == 0)
@@ -244,9 +251,11 @@ public class Golf {
 
 	}
 
+	/**
+	 * Controls game play.
+	 */
 	public void playGame() {
 		Deck deck;
-
 		Player human = new Player("Human");
 		Player computer = new Player("Computer");
 		DiscardPile discards = new DiscardPile();
@@ -268,7 +277,7 @@ public class Golf {
 
 		boolean playerTurn = true;
 		System.out.println(human);
-
+		System.out.println(computer);
 		discards.addCard(drawCards("", deck ));
 		System.out.println("Discarded: " + discards.getTop());
 

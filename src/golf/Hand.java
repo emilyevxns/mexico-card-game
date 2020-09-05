@@ -40,7 +40,10 @@ public class Hand {
 //		Collections.sort(cards);
 	}
 	
-
+	/**
+	 * Adds new cards to the hand
+	 * @param newCards to add
+	 */
 	public void addCards(ArrayList<PlayingCard> newCards)
 	{
 		cards.addAll(newCards);
@@ -48,7 +51,11 @@ public class Hand {
 	}
 	
 
-	
+	/**
+	 * Replaces one card in the hand with a card drawn from the deck
+	 * @param replace
+	 * @param drawn
+	 */
 	public void replaceCard(PlayingCard replace, PlayingCard drawn)
 	{
 		cards.remove(replace);
@@ -56,6 +63,10 @@ public class Hand {
 
 	}
 	
+	/**
+	 * Shuffles through the cards and returns the highest visible card
+	 * @return highest visible playing card
+	 */
 	public PlayingCard highestVisible()
 	{
 		ArrayList<PlayingCard> allCards = new ArrayList<PlayingCard>();
@@ -72,6 +83,10 @@ public class Hand {
 		return cards;
 	}
 	
+	/**
+	 * Scores the current hand of the player
+	 * @return score value
+	 */
 	public int scoreHand()
 	{
 		int score = 0;
@@ -81,6 +96,7 @@ public class Hand {
 		}
 		return score;
 	}
+	
 	/**
 	 * Choose a random card
 	 * @return the value of the card found

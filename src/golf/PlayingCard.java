@@ -5,7 +5,7 @@ package golf;
  * @author jburge
  *
  */
-public class PlayingCard implements Comparable {
+public class PlayingCard implements Comparable<Object> {
 	
 	public static int MIN = 1;
 	public static int MAX = 13; 
@@ -58,15 +58,35 @@ public class PlayingCard implements Comparable {
 		}
 		return INVALID;
 	}
+	
+	/**
+	 * Returns the suit of the playing card.
+	 * @return string suit name 
+	 */
 	public String getSuit() {
 		return suit;
 	}
+	
+	/**
+	 * Sets the suit of the playing card.
+	 * @param suit name
+	 */ 
 	public void setSuit(String suit) {
 		this.suit = suit;
 	}
+	
+	/**
+	 * Gets the type of the playing card
+	 * @return type number
+	 */
 	public int getType() {
 		return type;
 	}
+	
+	/**
+	 * Sets the type of the playing card
+	 * @param type
+	 */
 	public void setType(int type) {
 		this.type = type;
 	}
@@ -87,7 +107,7 @@ public class PlayingCard implements Comparable {
 	}
 	
 
-	public boolean equalsType(int type) {
+	public boolean equalsType(int type) { // need to write proper equals method 
 		return this.type == type;
 	}
 	

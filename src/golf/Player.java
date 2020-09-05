@@ -22,6 +22,10 @@ public class Player {
 		myHand = new Hand();
 	}
 	
+	/**
+	 * Gets the name of the player
+	 * @return player name
+	 */
 	public String getName()
 	{
 		return this.name;
@@ -59,6 +63,10 @@ public class Player {
 		myHand.replaceCard(replace, drawn);
 	}
 	
+	/**
+	 * Gets all the cards in the hand
+	 * @return list of cards in hand
+	 */
 	public ArrayList<PlayingCard> getHand() {
 		return myHand.getCards();
 	}
@@ -73,7 +81,10 @@ public class Player {
 		myHand.addCards(newCards);
 	}
 	
-	
+	/**
+	 * Calculates the score of the hand 
+	 * @return score of hand
+	 */
 	public int calculateScore()
 	{
 		return myHand.scoreHand();
@@ -88,6 +99,11 @@ public class Player {
 		return myHand.randomChoice();
 	}
 	
+	/**
+	 * Replaces the highest scoring card in the hand with a new card
+	 * @param possibleReplacement playing card
+	 * @return highest scoring card in hand
+	 */
 	public PlayingCard bestChoice(PlayingCard possibleReplacement)
 	{
 		PlayingCard highest = myHand.highestVisible();
