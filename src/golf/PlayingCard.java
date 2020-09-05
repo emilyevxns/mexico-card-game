@@ -107,7 +107,7 @@ public class PlayingCard implements Comparable<Object> {
 	}
 	
 
-	public boolean equalsType(int type) { // need to write proper equals method 
+	public boolean equalsType(int type) { // need to write proper equals method ???
 		return this.type == type;
 	}
 	
