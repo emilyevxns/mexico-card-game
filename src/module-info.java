@@ -1,2 +1,3 @@
 module honorHwTwo {
+	requires junit;
 }

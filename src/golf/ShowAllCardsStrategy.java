@@ -2,7 +2,7 @@ package golf;
 
 import java.util.ArrayList;
 
-public class AllCardsVisibleStrategy implements IStrategy {
+public class ShowAllCardsStrategy implements IStrategy {
 
 	/**
 	 * Forms the string that shows the correct amount of cards during game play.

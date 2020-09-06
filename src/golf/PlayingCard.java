@@ -156,9 +156,19 @@ public class PlayingCard implements Comparable<Object> {
 	/**
 	 * Returns a string version of the card to use when printing
 	 */
+	@Override
 	public String toString()
 	{
 		return types[type] + " of " + suit;
+	}
+	
+	/**
+	 * Helper method for testing. Returns type name
+	 * @param type index
+	 * @return type name 
+	 */
+	public String getTypeName(int type) {
+		return types[type];
 	}
 	
 }

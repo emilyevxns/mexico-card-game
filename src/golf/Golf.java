@@ -26,7 +26,7 @@ public class Golf {
 
 	public static ShowNoneStrategy SHOW_NONE_STRATEGY;
 	public static ShowTwoStrategy SHOW_TWO_STRATEGY;
-	public static AllCardsVisibleStrategy SHOW_ALL_CARDS;
+	public static ShowAllCardsStrategy SHOW_ALL_CARDS;
 
 	private boolean humanKnock = false;
 	private boolean computerKnock = false;
@@ -36,8 +36,7 @@ public class Golf {
 	public Golf() {
 		SHOW_NONE_STRATEGY = new ShowNoneStrategy();
 		SHOW_TWO_STRATEGY = new ShowTwoStrategy();
-		SHOW_ALL_CARDS = new AllCardsVisibleStrategy();
-		playerStrategy = getPlayerStrategy();
+		SHOW_ALL_CARDS = new ShowAllCardsStrategy();
 	}
 	/**
 	 * Asks for a yes/no response and repeats the question until valid input is received
@@ -305,7 +304,7 @@ public class Golf {
 		Scanner in = new Scanner(System.in);
 		boolean isWinner = false;
 		System.out.println("Welcome to Golf!");
-
+		playerStrategy = getPlayerStrategy();
 		deck = new Deck(DECK_SIZE);
 
 		//Deal initial cards to each player
