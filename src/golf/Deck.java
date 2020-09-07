@@ -67,4 +67,12 @@ public class Deck {
 		deck.remove(0);
 		return card;
 	}
+	
+	/**
+	 * Returns drawn card to the deck.
+	 */
+	public void returnDraw(PlayingCard cardDrawn)
+	{
+		deck.add(cardDrawn);
+	}
 }

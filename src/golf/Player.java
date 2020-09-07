@@ -16,8 +16,7 @@ public class Player {
 	 * Creates a Player and gives them a name
 	 * @param name
 	 */
-	public Player(String name)
-	{
+	public Player(String name) {
 		this.name = name;
 		myHand = new Hand();
 	}
@@ -26,8 +25,7 @@ public class Player {
 	 * Gets the name of the player
 	 * @return player name
 	 */
-	public String getName()
-	{
+	public String getName() {
 		return this.name;
 	}
 	
@@ -35,8 +33,7 @@ public class Player {
 	 * Returns the number of cards held in the player's hand
 	 * @return number of cards
 	 */
-	public int numCards()
-	{
+	public int numCards() {
 		return myHand.numCards();
 	}
 	
@@ -47,8 +44,7 @@ public class Player {
 	 * @param deck the deck of cards
 	 * @return the card dealt
 	 */
-	public PlayingCard draw(Deck deck)
-	{
+	public PlayingCard draw(Deck deck) {
 		PlayingCard cardDealt = deck.draw();
 		myHand.addCard(cardDealt);
 		return cardDealt;
@@ -58,9 +54,16 @@ public class Player {
 	 * Puts a card back in the player's hand
 	 * @param card the card being added
 	 */
-	public void replaceCard(PlayingCard replace, PlayingCard drawn)
-	{
+	public void replaceCard(PlayingCard replace, PlayingCard drawn) {
 		myHand.replaceCard(replace, drawn);
+	}
+	
+	/**
+	 * Puts a card back in the player's hand
+	 * @param card the card being added
+	 */
+	public void undoReplaceCard(PlayingCard replace, PlayingCard drawn) {
+		myHand.undoReplaceCard(replace, drawn);
 	}
 	
 	/**
@@ -76,8 +79,7 @@ public class Player {
 	 * Used to add a list of cards to the player's hand
 	 * @param newCards - cards being added
 	 */
-	public void addCards(ArrayList<PlayingCard> newCards)
-	{
+	public void addCards(ArrayList<PlayingCard> newCards) {
 		myHand.addCards(newCards);
 	}
 	
@@ -85,8 +87,7 @@ public class Player {
 	 * Calculates the score of the hand 
 	 * @return score of hand
 	 */
-	public int calculateScore()
-	{
+	public int calculateScore() {
 		return myHand.scoreHand();
 	}
 	
@@ -94,8 +95,7 @@ public class Player {
 	 * Gets a random card from the hand
 	 * @return the value of the random card
 	 */
-	public PlayingCard randomChoice()
-	{
+	public PlayingCard randomChoice() {
 		return myHand.randomChoice();
 	}
 	
@@ -104,8 +104,7 @@ public class Player {
 	 * @param possibleReplacement playing card
 	 * @return highest scoring card in hand
 	 */
-	public PlayingCard bestChoice(PlayingCard possibleReplacement)
-	{
+	public PlayingCard bestChoice(PlayingCard possibleReplacement) {
 		PlayingCard highest = myHand.highestVisible();
 		if (highest != null)
 		{
@@ -134,12 +133,9 @@ public class Player {
 	/**
 	 * Used to create a string representation of the player so it can be printed.
 	 */
-	public String toString()
-	{
+	public String toString() {
 		String player = "\n" + name + ":\n";
 		player += myHand.toString();
 		return player;
 	}
-	
-	
 }

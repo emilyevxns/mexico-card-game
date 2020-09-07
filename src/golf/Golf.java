@@ -2,6 +2,7 @@ package golf;
 import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
+import java.util.Stack;
 
 
 /**
@@ -32,11 +33,18 @@ public class Golf {
 	private boolean computerKnock = false;
 	
 	private IStrategy playerStrategy;
+	private Stack<Command> commandStack;
+	private DrawCommand drawCommand;
+	private DrawDiscardCommand drawDiscardCommand;
+	private ReplaceCommand replaceCommand;
+	private DiscardCardCommand discardCardCommand;
+	private int turn;
 
 	public Golf() {
 		SHOW_NONE_STRATEGY = new ShowNoneStrategy();
 		SHOW_TWO_STRATEGY = new ShowTwoStrategy();
 		SHOW_ALL_CARDS = new ShowAllCardsStrategy();
+		commandStack = new Stack<Command>();
 	}
 	/**
 	 * Asks for a yes/no response and repeats the question until valid input is received
@@ -306,59 +314,71 @@ public class Golf {
 		System.out.println("Welcome to Golf!");
 		playerStrategy = getPlayerStrategy();
 		deck = new Deck(DECK_SIZE);
-
 		//Deal initial cards to each player
-		for (int i=0; i < Golf.START_CARDS; i++)
-		{
+		for (int i=0; i < Golf.START_CARDS; i++){
 			human.draw(deck);
 			computer.draw(deck);
 		}
-
-
 		boolean playerTurn = true;
 		System.out.println(playerStrategy.showCards(human));
 		System.out.println(playerStrategy.showCards(computer));
 		discards.addCard(drawCards("", deck ));
 		System.out.println("Discarded: " + discards.getTop());
-
+		drawCommand = new DrawCommand(deck, human);
+		drawDiscardCommand = new DrawDiscardCommand(discards, human);
+		replaceCommand = new ReplaceCommand(null, null, human);
+		discardCardCommand = new DiscardCardCommand(discards, null, human);
 		//Main loop
-		while(!isWinner)
-		{
-			while (playerTurn)
-			{
+		int commandsThisRound = 0;
+		while(!isWinner) {
+			while (playerTurn) {
 				System.out.println("\nHuman's Turn!");
 				int choice = playerMenu();
+				if (commandsThisRound != 0) {
+					commandsThisRound = 0;
+				}
 				switch(choice) {
 				case DRAW:
-					PlayingCard drawn = drawCards("Drawing card from deck", deck);
+					PlayingCard drawn = drawCommand.execute();
+					drawCommand.resetDrawCommand(human);
+					commandStack.push(drawCommand.getCommand());
 					if (drawn != null)
 					{
 						System.out.println("Drew " + drawn.toString());
 						PlayingCard replaced = makeCardChoice("Select a card to replace: ", human.getHand(), true);
 						if (replaced == null)
 						{
-							discards.addCard(drawn);
+							discardCardCommand.resetDiscard(drawn, human);
+							discardCardCommand.execute();
+							commandStack.push(discardCardCommand.getCommand());
 							System.out.println("Discarded: " + discards.getTop());
 						}
 						else
 						{
-							human.replaceCard(replaced, drawn);
-							discards.addCard(replaced);
+							replaceCommand.resetReplace(drawn, replaced, human);
+							replaceCommand.execute();
+							commandStack.push(replaceCommand.getCommand());
+							discardCardCommand.resetDiscard(replaced, human);
+							discardCardCommand.execute();
+							commandStack.push(discardCardCommand.getCommand());
 							System.out.println("Discarded: " + discards.getTop());
 						}
 						playerTurn = false;
 					}
 					break;
 				case PICK_DISCARD:
-					drawn = discards.draw();
+					drawDiscardCommand.resetDrawCommand(human);
+					drawn = drawDiscardCommand.execute();
+					commandStack.push(discardCardCommand.getCommand());
 					System.out.println("\nDrew " + drawn.toString());
 					PlayingCard replaced = makeCardChoice("\nSelect a card to replace: ", human.getHand(), false);
-
-					discards.addCard(replaced);
-					System.out.println("Discarded: " + discards.getTop());
-
-					human.replaceCard(replaced, drawn);
-
+					replaceCommand.resetReplace(drawn, replaced, human); 
+					discardCardCommand.resetDiscard(replaced, human);
+					discardCardCommand.execute(); 
+					commandStack.push(discardCardCommand.getCommand());
+					replaceCommand.execute();
+					commandStack.push(replaceCommand.getCommand());
+					System.out.println("Discarded: " + discards.getTop()); 
 					playerTurn = false;
 					break;
 				case KNOCK:
@@ -367,7 +387,25 @@ public class Golf {
 					playerTurn = false;
 					break;
 				case UNDO_MOVE:
-					System.out.println("Undo is not implemented!");
+					boolean done = false;
+					while (!done) {
+						if(commandStack.empty()) {
+							done = true;
+						}
+						if (!commandStack.empty() && done != true) {
+							for (int i = 0; i < 5; i++) {
+								if (!commandStack.empty()) {
+									Command command = commandStack.peek();
+									commandStack.pop().undo();
+									System.out.println("UNDO "+command.toString());
+								}
+							}
+							boolean complete = requestYesNo("Are you finished undoing?");
+							if (complete) {
+								done = true;
+							}
+						}
+					}
 					break;
 				case CHANGE_STRATEGY:
 					setPlayerStrategy();
@@ -375,7 +413,7 @@ public class Golf {
 				}
 				System.out.println(playerStrategy.showCards(human));
 			}
-
+			turn++; //human has taken their turn
 			//If we've run out of cards to draw or if the human has knocked
 			if ((deck.size() == 0) || computerKnock)
 			{
@@ -393,12 +431,16 @@ public class Golf {
 				}
 				else //Computer chooses to replace a card 
 				{
-					PlayingCard drawn = drawCards("Drawing card from deck", deck);
+					PlayingCard drawn = drawCommand.execute();
+					drawCommand.resetDrawCommand(computer);
+					commandStack.push(drawCommand.getCommand());
 					System.out.println("Drew " + drawn.toString());
 					PlayingCard replaced = computer.bestChoice(drawn);
 					if (replaced != null)
 					{
-						computer.replaceCard(replaced, drawn);
+						replaceCommand.resetReplace(drawn, replaced, computer);
+						replaceCommand.execute();
+						commandStack.push(replaceCommand.getCommand());
 					}
 					else
 					{
@@ -407,8 +449,9 @@ public class Golf {
 					//Draw a card from the deck
 					//Randomly choose a card to replace with it
 					//Add card to discard
-
-					discards.addCard(replaced);
+					discardCardCommand.resetDiscard(replaced, computer);
+					discardCardCommand.execute();
+					commandStack.push(discardCardCommand.getCommand());
 					System.out.println("Discarded: " + discards.getTop());
 					System.out.println(playerStrategy.showCards(computer));
 					playerTurn = true;
@@ -419,9 +462,15 @@ public class Golf {
 						checkWinner(human, computer);
 						isWinner = true;
 					}
+					turn++;
 				}
 			}
 		}
+		turn = 0;
+	}
+	
+	public void getHumanAction() {
+		
 	}
 
 	/**

@@ -16,7 +16,6 @@ public class DiscardPile {
 
 	/**
 	 * Create an empty pile
-	 * @param book
 	 */
 	public DiscardPile() {
 		discardedCards = new Stack<PlayingCard>();
@@ -24,10 +23,9 @@ public class DiscardPile {
 
 	/**
 	 * Gets the active pile
-	 * @return
+	 * @return discard pile
 	 */
-	public ArrayList<PlayingCard>getDiscards()
-	{
+	public ArrayList<PlayingCard> getDiscards() {
 		ArrayList<PlayingCard> pile = new ArrayList(Arrays.asList(this.discardedCards.toArray()));
 		Collections.reverse(pile);
 		return pile;
@@ -43,7 +41,7 @@ public class DiscardPile {
 
 	/**
 	 * Returns the top card without removing it from the discard pile
-	 * @return
+	 * @return top playing card
 	 */
 	public PlayingCard getTop()
 	{
@@ -54,19 +52,27 @@ public class DiscardPile {
 	 * Gets the top card and removes it from the discard pile
 	 * @return
 	 */
-	public PlayingCard draw()
-	{
+	public PlayingCard draw() {
 		return discardedCards.pop();
 	}
+	
 	/**
 	 * Used to print out the pile. Java iterates over stacks in the wrong order so we
 	 * have to do it manually. Kind of negates the whole value of using Stack...
 	 */
-	public String toString()
-	{
+	public String toString() {
 		String pileInfo = "";
 		pileInfo += "Top Discard = " + discardedCards.peek().toString();
 		pileInfo += "\n";
 		return pileInfo;
+	}
+
+	/**
+	 * Helper method for remove command. Removes a card from the discard pile.
+	 * @param card to be removed
+	 */
+	public void removeCard(PlayingCard deleteThisCard) {
+		this.discardedCards.remove(deleteThisCard);
+		
 	}
 }
