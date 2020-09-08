@@ -16,6 +16,11 @@ import golf.Golf;
 import golf.Player;
 import golf.PlayingCard;
 
+/**
+ * Tests the DrawCommand class
+ * @author emilyannevans
+ *
+ */
 public class drawFromDeckCommandTest {
 	private DiscardPile discardedCards;
 	private Player computer;
@@ -38,14 +43,40 @@ public class drawFromDeckCommandTest {
 		cardsInHand = computer.getHand();;
 	}
 
+	/**
+	 * Tests the execute method
+	 */
 	@Test
-	public void test() {
+	public void testExecute() {
 		PlayingCard card = deck.getTop();
 		assertEquals(card, drawCommand.execute());
 	}
 	
+	/**
+	 * Tests the execute method again
+	 */
+	@Test
+	public void testAntherExecute() {
+		PlayingCard card = deck.getTop();
+		assertEquals(card, drawCommand.execute());
+	}
+	
+	/**
+	 * Tests the undo method
+	 */
 	@Test
 	public void testUndo() {
+		PlayingCard card = deck.getTop();
+		drawCommand.execute();
+		drawCommand.undo();
+		assertEquals(card, deck.getTop());
+	}
+	
+	/**
+	 * Tests the undo method again
+	 */
+	@Test
+	public void testAnotherUndo() {
 		PlayingCard card = deck.getTop();
 		drawCommand.execute();
 		drawCommand.undo();

@@ -17,6 +17,11 @@ import golf.Player;
 import golf.PlayingCard;
 import golf.ReplaceCommand;
 
+/**
+ * Runs all tests on the Command Pattern
+ * @author emilyannevans
+ *
+ */
 @RunWith(Suite.class)
 @SuiteClasses({ discardCardCommandTest.class, drawFromDeckCommandTest.class, pickUpDiscardCommandTest.class,
 		replaceCardCommandTest.class })

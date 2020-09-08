@@ -14,6 +14,11 @@ import golf.Player;
 import golf.PlayingCard;
 import golf.ShowNoneStrategy;
 
+/**
+ * Tests the ShowNoneStrategy class
+ * @author emilyannevans
+ *
+ */
 public class noCardsTest {
 	private Golf golf;
 	private Deck deck;

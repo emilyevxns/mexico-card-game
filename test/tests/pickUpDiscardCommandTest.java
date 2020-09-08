@@ -44,9 +44,13 @@ public class pickUpDiscardCommandTest {
 			computer.draw(deck);
 		}
 	}
-
+	
+	
+	/**
+	 * Tests the execute method
+	 */
 	@Test
-	public void test() {
+	public void testExecute() {
 		PlayingCard deckCard = drawCommand.execute();
 		discardCommand.resetDiscard(deckCard, computer);
 		discardCommand.execute();
@@ -54,9 +58,37 @@ public class pickUpDiscardCommandTest {
 		assertEquals(deckCard, drawDiscard.execute());
 	}
 	
+	/**
+	 * Tests the execute method again
+	 */
+	@Test
+	public void testAnotherExecute() {
+		PlayingCard deckCard = drawCommand.execute();
+		discardCommand.resetDiscard(deckCard, computer);
+		discardCommand.execute();
+		drawDiscard.resetDrawCommand(computer);
+		assertEquals(deckCard, drawDiscard.execute());
+	}
 	
+	/**
+	 * Tests the undo method
+	 */
 	@Test 
 	public void testUndo() {
+		PlayingCard deckCard = drawCommand.execute();
+		discardCommand.resetDiscard(deckCard, computer);
+		discardCommand.execute();
+		PlayingCard discardCard = drawDiscard.execute();
+		drawDiscard.undo();
+		PlayingCard discardTopCard = discardedCards.getTop();
+		assertEquals(discardCard, discardTopCard);
+	}
+	
+	/**
+	 * Tests the undo method again
+	 */
+	@Test 
+	public void testAnotherUndo() {
 		PlayingCard deckCard = drawCommand.execute();
 		discardCommand.resetDiscard(deckCard, computer);
 		discardCommand.execute();

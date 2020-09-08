@@ -14,6 +14,11 @@ import golf.Player;
 import golf.PlayingCard;
 import golf.ShowAllCardsStrategy;
 
+/**
+ * Tests the ShowAllCardsStrategy 
+ * @author emilyannevans
+ *
+ */
 public class allCardsTest {
 	private Golf golf;
 	private Deck deck;

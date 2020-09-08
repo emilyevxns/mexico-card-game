@@ -14,6 +14,11 @@ import golf.Player;
 import golf.PlayingCard;
 import golf.ShowTwoStrategy;
 
+/**
+ * Tests the ShowTwoStrategy class
+ * @author emilyannevans
+ *
+ */
 public class twoCardsTest {
 
 	private Golf golf;
@@ -39,7 +44,9 @@ public class twoCardsTest {
 		cardsInHand = computer.getHand();;
 	}
 	
-	
+	/**
+	 * Tests the showCards method 
+	 */
 	@Test
 	public void showTwoTest() {
 		ShowTwoStrategy showTwo = new ShowTwoStrategy();

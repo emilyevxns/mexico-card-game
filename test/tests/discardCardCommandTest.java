@@ -44,6 +44,9 @@ public class discardCardCommandTest {
 		}
 	}
 
+	/**
+	 * Tests the execute method
+	 */
 	@Test
 	public void testExecute() {
 		PlayingCard card = drawCommand.execute();
@@ -51,7 +54,9 @@ public class discardCardCommandTest {
 		discardCommand.execute();
 		assertEquals(card, discardedCards.getTop());
 	}
-	
+	/**
+	 * Tests the execute method again
+	 */
 	@Test
 	public void testAnotherExecute() {
 		PlayingCard card = drawCommand.execute();
@@ -60,6 +65,9 @@ public class discardCardCommandTest {
 		assertEquals(card, discardedCards.getTop());
 	}
 	
+	/**
+	 * Tests the undo method
+	 */
 	@Test
 	public void testUndo() {
 		PlayingCard card = drawCommand.execute();
@@ -69,6 +77,9 @@ public class discardCardCommandTest {
 		assertTrue(discardedCards.getDiscards().isEmpty());
 	}
 	
+	/**
+	 * Tests the undo method again
+	 */
 	@Test
 	public void testAnotherUndo() {
 		PlayingCard card = drawCommand.execute();

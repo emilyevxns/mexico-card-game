@@ -17,6 +17,11 @@ import golf.Player;
 import golf.PlayingCard;
 import golf.ReplaceCommand;
 
+/**
+ * Tests the ReplaceCommand class
+ * @author emilyannevans
+ *
+ */
 public class replaceCardCommandTest {
 
 	private ReplaceCommand replaceCommand;
@@ -47,6 +52,9 @@ public class replaceCardCommandTest {
 		originalHand = computer.getHand();
 	}
 
+	/**
+	 * Tests the execute method
+	 */
 	@Test
 	public void testExecute() {
 		replaceCommand.resetReplace(draw, replace, computer);
@@ -58,6 +66,9 @@ public class replaceCardCommandTest {
 		
 	}
 	
+	/**
+	 * Tests the execute method again
+	 */
 	@Test
 	public void testAnotherExecute() {
 		replaceCommand.resetReplace(draw, replace, computer);
@@ -69,6 +80,9 @@ public class replaceCardCommandTest {
 		
 	}
 	
+	/**
+	 * Tests the undo method
+	 */
 	@Test
 	public void testUndo() {
 		replaceCommand.execute();
@@ -78,6 +92,9 @@ public class replaceCardCommandTest {
 		assertEquals(originalHand, computerUndoHand);
 	}
 	
+	/**
+	 * Tests the undo method again
+	 */
 	@Test
 	public void testAnotherUndo() {
 		replaceCommand.execute();
