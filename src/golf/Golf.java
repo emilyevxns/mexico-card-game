@@ -38,7 +38,6 @@ public class Golf {
 	private DrawDiscardCommand drawDiscardCommand;
 	private ReplaceCommand replaceCommand;
 	private DiscardCardCommand discardCardCommand;
-	private int turn;
 
 	public Golf() {
 		SHOW_NONE_STRATEGY = new ShowNoneStrategy();
@@ -283,6 +282,10 @@ public class Golf {
 
 	}
 	
+	/**
+	 * Gets the strategy the player is using
+	 * @return strategy 
+	 */
 	public IStrategy getPlayerStrategy() {
 		int selectedStrategy = strategyMenu();
 		switch (selectedStrategy) {
@@ -297,10 +300,16 @@ public class Golf {
 		}
 		return null;
 	}
+	
+	/**
+	 * Sets the strategy the player will use
+	 */
 	public void setPlayerStrategy() {
 		IStrategy newStrategy = getPlayerStrategy();
 		playerStrategy = newStrategy;
 	}
+	
+	
 	/**
 	 * Controls game play.
 	 */
@@ -413,7 +422,6 @@ public class Golf {
 				}
 				System.out.println(playerStrategy.showCards(human));
 			}
-			turn++; //human has taken their turn
 			//If we've run out of cards to draw or if the human has knocked
 			if ((deck.size() == 0) || computerKnock)
 			{
@@ -462,15 +470,9 @@ public class Golf {
 						checkWinner(human, computer);
 						isWinner = true;
 					}
-					turn++;
 				}
 			}
 		}
-		turn = 0;
-	}
-	
-	public void getHumanAction() {
-		
 	}
 
 	/**
