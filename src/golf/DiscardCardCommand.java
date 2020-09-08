@@ -19,8 +19,7 @@ public class DiscardCardCommand implements Command, Cloneable {
 	public PlayingCard execute() {
 		// TODO Auto-generated method stub
 		discardPile.addCard(card);
-		
-		return null;
+		return card;
 	}
 
 	/**
@@ -62,6 +61,14 @@ public class DiscardCardCommand implements Command, Cloneable {
 	 */
 	public String getPlayerName() {
 		return player.getName();
+	}
+	
+	/**
+	 * Get card value--helper method for test
+	 * @return card value
+	 */
+	public PlayingCard getCard() {
+		return this.card;
 	}
 	
 	

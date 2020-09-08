@@ -66,6 +66,14 @@ public class ReplaceCommand implements Command, Cloneable {
 		return player.getName();
 	}
 	
+	public PlayingCard getNewCard() {
+		return newCard;
+	}
+	
+	public PlayingCard getOldCard() {
+		return oldCard;
+	}
+	
 	/**
 	 * Returns a string representation of the last command so we can 
 	 * print it out during undo.

@@ -114,7 +114,7 @@ public class Hand {
 		{
 			allCards += card.toString() + "\n";
 		}
-		allCards += "Current score = " + this.scoreHand();
+	//	allCards += "Current score = " + this.scoreHand();
 		return allCards;
 	}
 	

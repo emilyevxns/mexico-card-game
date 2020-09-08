@@ -1,4 +1,4 @@
-package strategyPatternTest;
+package tests;
 
 import static org.junit.Assert.*;
 
@@ -9,24 +9,20 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import golf.Deck;
-import golf.DiscardPile;
 import golf.Golf;
 import golf.Player;
 import golf.PlayingCard;
-import golf.ShowAllCardsStrategy;
-import golf.ShowNoneStrategy;
 import golf.ShowTwoStrategy;
 
-public class strategyTest {
-	
+public class twoCardsTest {
+
 	private Golf golf;
 	private Deck deck;
 	private Player human;
 	private Player computer;
 	private ArrayList<PlayingCard> cardsInHand;
 	private String expected;
-	
-	
+
 
 	@Before
 	public void setUp() throws Exception {
@@ -43,25 +39,6 @@ public class strategyTest {
 		cardsInHand = computer.getHand();;
 	}
 	
-	/**
-	 * Tests showCards method of ShowNoneStrategy 
-	 */
-	@Test
-	public void showNoneTest() {
-		ShowNoneStrategy showNone = new ShowNoneStrategy();
-		expected =  "\n" + computer.getName() + ":\n";
-		assertEquals(expected, showNone.showCards(computer));
-	}
-	
-	@Test
-	public void showAllTest() {
-		ShowAllCardsStrategy showAll = new ShowAllCardsStrategy();
-		expected =  "\n" + computer.getName() + ":\n";
-		for (PlayingCard card: cardsInHand) {
-			expected += card.getTypeName(card.getType()) + " of " + card.getSuit() + "\n";
-		}
-		assertEquals(expected, showAll.showCards(computer));
-	}
 	
 	@Test
 	public void showTwoTest() {
@@ -76,8 +53,5 @@ public class strategyTest {
 			}
 		}
 	}
+
 }
-
-
-
-

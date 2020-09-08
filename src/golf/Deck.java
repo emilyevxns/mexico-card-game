@@ -69,10 +69,19 @@ public class Deck {
 	}
 	
 	/**
+	 * Gets the top card at the deck 
+	 * @return card at the top of the deck
+	 */
+	public PlayingCard getTop() {
+		PlayingCard card = deck.get(0);
+		return card;
+	}
+	
+	/**
 	 * Returns drawn card to the deck.
 	 */
 	public void returnDraw(PlayingCard cardDrawn)
 	{
-		deck.add(cardDrawn);
+		deck.add(0, cardDrawn);
 	}
 }
