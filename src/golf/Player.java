@@ -3,7 +3,7 @@ import java.util.ArrayList;
 
 /**
  * Defines the player class. This includes the hand, any books placed on the table, and a name.
- * @author jburge
+ * @author jburge, emilyannevans
  *
  */
 public class Player {
@@ -28,16 +28,6 @@ public class Player {
 	public String getName() {
 		return this.name;
 	}
-	
-	/**
-	 * Returns the number of cards held in the player's hand
-	 * @return number of cards
-	 */
-	public int numCards() {
-		return myHand.numCards();
-	}
-	
-
 	
 	/**
 	 * Draws a card from the deck and places it in the player's hand
@@ -92,14 +82,6 @@ public class Player {
 	}
 	
 	/**
-	 * Gets a random card from the hand
-	 * @return the value of the random card
-	 */
-	public PlayingCard randomChoice() {
-		return myHand.randomChoice();
-	}
-	
-	/**
 	 * Replaces the highest scoring card in the hand with a new card
 	 * @param possibleReplacement playing card
 	 * @return highest scoring card in hand
@@ -128,7 +110,6 @@ public class Player {
 			}
 		}
 	}
-
 	
 	/**
 	 * Used to create a string representation of the player so it can be printed.

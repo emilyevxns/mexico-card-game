@@ -8,7 +8,7 @@ import java.util.Stack;
 
 /**
  * Defines the discarded cards
- * @author jburge
+ * @author jburge, emilyannevans
  *
  */
 public class DiscardPile {

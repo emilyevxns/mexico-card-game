@@ -7,7 +7,7 @@ import java.util.Stack;
 
 /**
  * This is the main class for a Golf game. See https://www.pagat.com/draw/golf.html
- * @author jburge
+ * @author jburge, emilyannevans
  *
  */
 public class Golf {

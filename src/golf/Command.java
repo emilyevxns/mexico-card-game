@@ -1,5 +1,10 @@
 package golf;
 
+/**
+ * Defines the Command interface
+ * @author emilyannevans
+ *
+ */
 public interface Command {
 	/**
 	 * Executes requested action

@@ -42,7 +42,9 @@ public class allCardsTest {
 		cardsInHand = computer.getHand();;
 	}
 	
-
+	/**
+	 * Tests the show all strategy method 
+	 */
 	@Test
 	public void showAllTest() {
 		ShowAllCardsStrategy showAll = new ShowAllCardsStrategy();
@@ -52,5 +54,4 @@ public class allCardsTest {
 		}
 		assertEquals(expected, showAll.showCards(computer));
 	}
-
 }

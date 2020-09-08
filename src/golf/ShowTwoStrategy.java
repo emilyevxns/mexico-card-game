@@ -2,6 +2,11 @@ package golf;
 
 import java.util.ArrayList;
 
+/**
+ * Performs the show two strategy action
+ * @author emilyannevans
+ *
+ */
 public class ShowTwoStrategy implements IStrategy {
 
 	/**
@@ -22,7 +27,4 @@ public class ShowTwoStrategy implements IStrategy {
 		}
 		return playerString + cards;
 	}
-	
-	
-
 }

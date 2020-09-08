@@ -2,6 +2,11 @@ package golf;
 
 import java.util.ArrayList;
 
+/**
+ * Performs the Draw command, draws a card from the deck.
+ * @author emilyannevans
+ *
+ */
 public class DrawCommand implements Command, Cloneable {
 
 	private Deck deck;
@@ -42,7 +47,6 @@ public class DrawCommand implements Command, Cloneable {
 			return (Command) super.clone();
 		} catch (CloneNotSupportedException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
 		}	
 		return null;
 	}
@@ -54,15 +58,6 @@ public class DrawCommand implements Command, Cloneable {
 	public void resetDrawCommand(Player player) {
 		this.player = player;
 	}
-	
-	/**
-	 * Gets the player name
-	 * @return name of player 
-	 */
-	public String getPlayerName() {
-		return player.getName();
-	}
-	
 
 	/**
 	 * Returns a string summarizing the command undo for printing 

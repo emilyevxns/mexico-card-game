@@ -2,6 +2,11 @@ package golf;
 
 import java.util.ArrayList;
 
+/**
+ * Performs the show no cards strategy action
+ * @author emilyannevans
+ *
+ */
 public class ShowNoneStrategy implements IStrategy {
 
 	/**

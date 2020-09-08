@@ -4,7 +4,7 @@ import java.util.Collections;
 
 /**
  * Defines a deck of cards. Allows decks to be smaller for testing purposes.
- * @author jburge
+ * @author jburge, emilyannevans
  *
  */
 public class Deck {

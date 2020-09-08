@@ -1,5 +1,10 @@
 package golf;
 
+/**
+ * Performs the DrawDiscardCommand-- draws card from discard pile
+ * @author emilyannevans
+ *
+ */
 public class DrawDiscardCommand implements Command, Cloneable {
 	
 	private DiscardPile discards;
@@ -14,6 +19,7 @@ public class DrawDiscardCommand implements Command, Cloneable {
 	
 	/**
 	 * Draws a card from the discard pile
+	 * @return card that was just drawn
 	 */
 	@Override
 	public PlayingCard execute() {
@@ -31,14 +37,6 @@ public class DrawDiscardCommand implements Command, Cloneable {
 	}
 
 	/**
-	 * Returns a string for printing.
-	 */
-	@Override
-	public String toString() {
-		return "DrawDiscardCommand: returned " + card.toString() + " to discard pile";
-	}
-	
-	/**
 	 * Gets and instance of this command to be pushed onto the stack.
 	 * @return this command instance
 	 */
@@ -47,27 +45,25 @@ public class DrawDiscardCommand implements Command, Cloneable {
 			return (Command) super.clone();
 		} catch (CloneNotSupportedException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
 		}	
 		return null;
 	}
 	
 	/**
-	 * Assigns draw to a player
+	 * Assigns new draw to a player
 	 * @param player that is drawing
 	 */
 	public void resetDrawCommand(Player player) {
 		this.player = player;
 	}
 	
+	
 	/**
-	 * Gets the player name
-	 * @return name of player 
+	 * Returns a string for printing.
 	 */
-	public String getPlayerName() {
-		return player.getName();
+	@Override
+	public String toString() {
+		return "DrawDiscardCommand: returned " + card.toString() + " to discard pile";
 	}
-	
-	
 
 }

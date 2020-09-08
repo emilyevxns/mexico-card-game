@@ -5,7 +5,7 @@ import java.util.Random;
 
 /**
  * Represent the hand of cards held by a player
- * @author jburge
+ * @author jburge, emilyannevans
  *
  */
 public class Hand {
@@ -35,7 +35,6 @@ public class Hand {
 	 */
 	public void addCard(PlayingCard newcard) {
 		cards.add(newcard);
-//		Collections.sort(cards); 
 	}
 	
 	/**
@@ -44,7 +43,6 @@ public class Hand {
 	 */
 	public void addCards(ArrayList<PlayingCard> newCards) {
 		cards.addAll(newCards);
-
 	}
 	
 
@@ -126,7 +124,7 @@ public class Hand {
 	public void undoReplaceCard(PlayingCard replace, PlayingCard drawn) {
 		int index = 0;
 		for (int i = 0; i < cards.size(); i++) {
-			if (cards.get(i) == drawn) {  // will probably have to replace this with a proper equals method?
+			if (cards.get(i) == drawn) { 
 				index = i;
 			}
 		}

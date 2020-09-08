@@ -2,6 +2,11 @@ package golf;
 
 import java.util.ArrayList;
 
+/**
+ * Performs the show all cards strategy action
+ * @author emilyannevans
+ *
+ */
 public class ShowAllCardsStrategy implements IStrategy {
 
 	/**

@@ -50,7 +50,6 @@ public class DiscardCardCommand implements Command, Cloneable {
 			return (Command) super.clone();
 		} catch (CloneNotSupportedException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
 		}	
 		return null;
 	}

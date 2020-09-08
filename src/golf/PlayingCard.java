@@ -2,26 +2,26 @@ package golf;
 
 /**
  * Represents a playing card
- * @author jburge
+ * @author jburge, emilyannevans
  *
  */
 public class PlayingCard implements Comparable<Object> {
 	
-	public static int MIN = 1;
-	public static int MAX = 13; 
-	public static int INVALID = -1;
+	public final static int MIN = 1;
+	public final static int MAX = 13; 
+	public final static int INVALID = -1;
 	
-	public static int ACE = 1;
-	public static int JACK = 11;
-	public static int QUEEN = 12;
-	public static int KING = 13;
+	public final static int ACE = 1;
+	public final static int JACK = 11;
+	public final static int QUEEN = 12;
+	public final static int KING = 13;
 	
-	public static String HEARTS = "Hearts";
-	public static String CLUBS = "Clubs";
-	public static String DIAMONDS = "Diamonds";
-	public static String SPADES = "Spades";
+	public final static String HEARTS = "Hearts";
+	public final static String CLUBS = "Clubs";
+	public final static String DIAMONDS = "Diamonds";
+	public final static String SPADES = "Spades";
 	
-	private static String types[] = {null, "Ace", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight",
+	private final static String types[] = {null, "Ace", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight",
 		"Nine", "Ten", "Jack", "Queen", "King"};
 	
 	private String suit;
@@ -91,8 +91,6 @@ public class PlayingCard implements Comparable<Object> {
 		this.type = type;
 	}
 	
-
-	
 	/**
 	 * This assumes that an Ace will have a value of 1
 	 * @return
@@ -104,11 +102,6 @@ public class PlayingCard implements Comparable<Object> {
 			return 10;
 		}
 		return type;
-	}
-	
-
-	public boolean equalsType(int type) { // need to write proper equals method ???
-		return this.type == type;
 	}
 	
 	/**
@@ -152,15 +145,6 @@ public class PlayingCard implements Comparable<Object> {
 			return 1;
 		}
 	}
-
-	/**
-	 * Returns a string version of the card to use when printing
-	 */
-	@Override
-	public String toString()
-	{
-		return types[type] + " of " + suit;
-	}
 	
 	/**
 	 * Helper method for testing. Returns type name
@@ -169,6 +153,15 @@ public class PlayingCard implements Comparable<Object> {
 	 */
 	public String getTypeName(int type) {
 		return types[type];
+	}
+	
+	/**
+	 * Returns a string version of the card to use when printing
+	 */
+	@Override
+	public String toString()
+	{
+		return types[type] + " of " + suit;
 	}
 	
 }
